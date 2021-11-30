@@ -27,28 +27,51 @@ move("button");
 const sliderNum = document.getElementById('slider-number')
 
 
-function applySliderConfigs(color, range) {
+function applySliderConfigs(color, range, btnSize, pos) {
+  //set button color
   document.getElementById("button").style.backgroundColor = color;
-  
-  range.map((num) => {
+  //set slider range 
+  sliderRange(range);
+  //set size
+  buttonSize(btnSize);
+  //set default slider position
+  sliderPosition(pos);
+}
+
+function changeColor() {
+   let color = document.getElementById("colorInputText").value;
+   console.log(color)
+   document.getElementById("button").style.backgroundColor = color;
+}
+
+
+function sliderRange() {
+  let scale = document.querySelector("#sliderScale").value;
+console.log(scale)
+  scale.map((num) => {
     var tr = document.createElement("tr");
     var text = document.createTextNode(`${num}`)
     const th1 = document.createElement("th");
 th1.appendChild(text);
     var th2 = document.createElement("th");
-  
-  
+ 
   th2.classList.add("line");
   tr.style.display = 'flex';
 tr.appendChild(th1);
 tr.appendChild(th2);
 sliderNum.appendChild(tr);
 })
-  //set size
-  //set slider range
-  //set default slider position
 }
-applySliderConfigs('purple', [9,8,7,6,5,4,3,2]) ;
+
+function buttonSize() {
+  let btnSize = document.getElementById("buttonSize").value;
+  document.getElementById("button").style.width = `${btnSize}px`;
+  const heightSize = btnSize * 1.5
+   document.getElementById("button").style.height = `${heightSize}px`;
+}
+
+
+// applySliderConfigs('purple', [9,8,7,6,5,4,3,2], 100, 300) ;
 
 function sliderPosition(position) {
  
@@ -60,7 +83,8 @@ function sliderPosition(position) {
 document.getElementById("button").style.top = `${position}px`  
 }
 }
-sliderPosition(300);
+
+
 
 
 
